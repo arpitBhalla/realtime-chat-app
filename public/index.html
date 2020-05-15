@@ -63,6 +63,7 @@
             })
             socket.on("getTyping", function (name) {
                 $(".contact--typingBox").text(name + " is typing...")
+                $(".contact--typingBox").show()
                 $(".contact--userBox").hide()
                 setTimeout(function () {
                     $(".contact--typingBox").hide()
@@ -78,6 +79,7 @@
                     time: new Date().getTime()
                 }
                 addNewChat(chat, true)
+                $("input").val("")
                 socket.emit("send", chat, function (data) {
                     console.log(data)
                 })

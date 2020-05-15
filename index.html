@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Chat App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header class="contact">
+        <section class="contact--details">
+            <h1 class="contact--details__name online">Chat Room</h1>
+            <p class="contact--userBox"></p>
+            <p class="contact--typingBox"></p>
+        </section>
+    </header>
+    <section class="messages">
+
+    </section>
+    <div class="form">
+        <input type="text" placeholder="Your message">
+        <div class="msg-send"><i class="material-icons">send</i></div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let now = new Date().getTime()
+            let uid = localStorage.getItem("uid") || localStorage.setItem("uid", now) && now
+            let displayName
+            if (!localStorage.getItem("displayName")) {
+                displayName = prompt("Enter name") || "User"
+                localStorage.setItem("displayName", displayName)
+            } else {
+                displayName = localStorage.getItem("displayName")
+            }
+            const addNewChat = (chat, byMe = false) => {
+                $(".messages")
+                    .append($(`<div class="msg msg--${!byMe?"me":"them"}"></div>`)
+                        .append($('<blockquote></blockquote>').html(chat.text)))
+                $(".messages").animate({
+                    scrollTop: 20000000
+                }, "slow");
+            }
+            const socket = io();
+            socket.emit("connected", uid, displayName, function (chats, users) {
+                chats.forEach(chat => {
+                    addNewChat(chat, chat.uid == uid)
+                })
+                $(".contact--userBox").text(users.join(", "))
+            })
+            socket.on("new connection", function (user, users) {
+                $(".messages").append(`<h3 class="msg--date">${user} connected</h3>`)
+                $(".contact--userBox").text(users.join(", "))
+            })
+            socket.on("new chat", function (chat) {
+                addNewChat(chat)
+            })
+            socket.on("getTyping", function (name) {
+                $(".contact--typingBox").text(name + " is typing...")
+                $(".contact--userBox").hide()
+                setTimeout(function () {
+                    $(".contact--typingBox").hide()
+                    $(".contact--userBox").show()
+
+                }, 2000)
+            })
+            $(".msg-send").click(function () {
+                const chat = {
+                    uid,
+                    displayName,
+                    text: $("input").val(),
+                    time: new Date().getTime()
+                }
+                addNewChat(chat, true)
+                socket.emit("send", chat, function (data) {
+                    console.log(data)
+                })
+            })
+            $("input").keyup(function () {
+                socket.emit("typing", displayName)
+            })
+        })
+    </script>
+
+</body>
+
+</html>

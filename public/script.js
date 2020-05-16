@@ -16,6 +16,7 @@ $(document).ready(function () {
     let displayName, uid
     if (!localStorage.getItem("uid") || localStorage.getItem("uid") == "") {
         displayName = prompt("Enter name") || "User"
+        displayName=displayName[0].toUpperCase()+displayName.slice(1)
         uid = (new Date().getTime()).toString()
         localStorage.setItem("displayName", displayName)
         localStorage.setItem("uid", uid)

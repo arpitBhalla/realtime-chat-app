@@ -9,6 +9,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+
 let chatData = []
 let users=[]
 let userNames=[]

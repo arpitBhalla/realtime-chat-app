@@ -1,8 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Varela+Round);
 
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
-}
 
 html, body {
     height: 100%;
@@ -18,7 +15,7 @@ body,header,.msg,.toolbar,.form {
     display: flex;
 }
 
-header, .messages, .blockquote {
+header, .messages {
     padding: .5em;
 }
 
@@ -73,6 +70,7 @@ input {
     display: inline-block;
     margin: 0;
     max-width: 60%;
+    padding:0px 0.5em ;
 }
 
 .msg--them .blockquote::after, .msg--me .blockquote::before {
@@ -93,7 +91,9 @@ input {
     top: .5em;
     right: -1em;
 }
-
+ .by,.time{
+  font-size: smaller;
+}
 .msg--me .blockquote {
   background-color: #0099cc; margin-left: 1em;
 }
@@ -108,7 +108,9 @@ input {
 .form {
   background-color: #727b80; padding: 1px;
 }
-
+.msg--me .by,.msg--them .time {
+  text-align: right;
+}
 
 .messages {
   flex: 1; overflow: auto;

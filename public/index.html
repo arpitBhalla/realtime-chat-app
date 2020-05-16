@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Chat App</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.min.css">
 
 </head>
 
@@ -21,6 +21,20 @@
     </header>
     <section class="messages">
         <h3 class="msg--date">Chat is End to End Encrypted</h3>
+        <div class="msg msg--me">
+            <div class="blockquote">
+                <div class="by">Rajiv</div>
+                <div class="text">Array ohhsafksldfoesjfiwueif</div>
+                <div class="time">Time</div>
+            </div>
+        </div>
+        <div class="msg msg--them">
+            <div class="blockquote">
+                <div class="by">Rajiv</div>
+                <div class="text">shzrfeuasryuewyrewtufhdsufhsudhfieygfuyds</div>
+                <div class="time">Time</div>
+            </div>
+        </div>
     </section>
     <div class="form">
         <input type="text" placeholder="Your message">
@@ -28,80 +42,7 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const addNewChat = (chat, byMe = false) => {
-                $(".messages")
-                    .append($(`<div class="msg msg--${!byMe?"me":"them"}"></div>`)
-                        .append($('<div class="blockquote"></div>').html(chat.text)))
-                $(".messages").animate({
-                    scrollTop: 20000000
-                }, "slow");
-            }
-            const socket = io();
-            let displayName, uid
-            if (!localStorage.getItem("uid")||localStorage.getItem("uid")=="") {
-                displayName = prompt("Enter name") || "User"
-                uid = (new Date().getTime()).toString()
-                localStorage.setItem("displayName", displayName)
-                localStorage.setItem("uid", uid)
-            } else {
-                displayName = localStorage.getItem("displayName")
-                uid = localStorage.getItem("uid")
-            }
-            const userBox=(users)=>{
-                let index=users.indexOf(displayName)
-                index>-1 && users.splice(index,1)
-                $(".contact--userBox").text("You, " + users)
-            }
-            socket.emit("connected", uid, displayName, function (chats, users) {
-                chats.forEach(chat => {
-                    addNewChat(chat, chat.uid == uid)
-                })
-                userBox(users)
-            })
-            socket.on("new connection", function (user, users) {
-                $(".messages").append(`<h3 class="msg--date">${user} connected</h3>`)
-                userBox(users)
-            })
-            socket.on("new chat", function (chat) {
-                addNewChat(chat)
-            })
-            socket.on("getTyping", function (name) {
-                $(".contact--typingBox").text(name + " is typing...")
-                $(".contact--typingBox").show()
-                $(".contact--userBox").hide()
-                setTimeout(function () {
-                    $(".contact--typingBox").hide()
-                    $(".contact--userBox").show()
-                }, 2000)
-            })
-            $(".msg-send").click(function () {
-                if ($("input").val() == "")
-                    return 0;
-                const chat = {
-                    uid,
-                    displayName,
-                    text: $("input").val(),
-                    time: new Date().getTime()
-                }
-                addNewChat(chat, true)
-                $("input").val("")
-                socket.emit("send", chat, function (data) {
-                    console.log(data)
-                })
-            })
-            $("input").keyup(function (e) {
-                if (e.keyCode == 13) {
-                    $(".msg-send").click()
-                    $(".contact--typingBox").hide()
-                    $(".contact--userBox").show()
-                } else
-                    socket.emit("typing", displayName)
-            })
-        })
-    </script>
-
+    <script src="script.min.js"></script>
 </body>
 
 </html>

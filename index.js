@@ -24,7 +24,8 @@ io.on('connection', (socket) => {
     socket.on('send', (chat, func) => {
         chatData.push({
             ...chat,
-            time: new Date().getTime()
+            timestamp: new Date().getTime()
+
         })
         socket.broadcast.emit("new chat", chat)
         func("Sent");

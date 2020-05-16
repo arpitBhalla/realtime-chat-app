@@ -14,10 +14,10 @@ let users=[]
 let userNames=[]
 io.on('connection', (socket) => {
     socket.on("connected", (uid,name, func) => {
-        if(!users.includes(uid)){
-            socket.broadcast.emit("new connection", name,userNames)
+        if(uid && !users.includes(uid)){
             users.push(uid)
             userNames.push(name)
+            socket.broadcast.emit("new connection", name,userNames)
         }
         func(chatData,userNames)
     })

@@ -20,7 +20,7 @@
         </section>
     </header>
     <section class="messages">
-
+        <h3 class="msg--date">Chat is End to End Encrypted</h3>
     </section>
     <div class="form">
         <input type="text" placeholder="Your message">
@@ -30,33 +30,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            let now = new Date().getTime()
-            let uid = localStorage.getItem("uid") || localStorage.setItem("uid", now) && now
-            let displayName
-            if (!localStorage.getItem("displayName")) {
-                displayName = prompt("Enter name") || "User"
-                localStorage.setItem("displayName", displayName)
-            } else {
-                displayName = localStorage.getItem("displayName")
-            }
             const addNewChat = (chat, byMe = false) => {
                 $(".messages")
                     .append($(`<div class="msg msg--${!byMe?"me":"them"}"></div>`)
-                        .append($('<blockquote></blockquote>').html(chat.text)))
+                        .append($('<div class="blockquote"></div>').html(chat.text)))
                 $(".messages").animate({
                     scrollTop: 20000000
                 }, "slow");
             }
             const socket = io();
+            let displayName, uid
+            if (!localStorage.getItem("uid")||localStorage.getItem("uid")=="") {
+                displayName = prompt("Enter name") || "User"
+                uid = (new Date().getTime()).toString()
+                localStorage.setItem("displayName", displayName)
+                localStorage.setItem("uid", uid)
+            } else {
+                displayName = localStorage.getItem("displayName")
+                uid = localStorage.getItem("uid")
+            }
+            const userBox=(users)=>{
+                let index=users.indexOf(displayName)
+                index>-1 && users.splice(index,1)
+                $(".contact--userBox").text("You, " + users)
+            }
             socket.emit("connected", uid, displayName, function (chats, users) {
                 chats.forEach(chat => {
                     addNewChat(chat, chat.uid == uid)
                 })
-                $(".contact--userBox").text(users.join(", "))
+                userBox(users)
             })
             socket.on("new connection", function (user, users) {
                 $(".messages").append(`<h3 class="msg--date">${user} connected</h3>`)
-                $(".contact--userBox").text(users.join(", "))
+                userBox(users)
             })
             socket.on("new chat", function (chat) {
                 addNewChat(chat)
@@ -68,10 +74,11 @@
                 setTimeout(function () {
                     $(".contact--typingBox").hide()
                     $(".contact--userBox").show()
-
                 }, 2000)
             })
             $(".msg-send").click(function () {
+                if ($("input").val() == "")
+                    return 0;
                 const chat = {
                     uid,
                     displayName,
@@ -84,8 +91,13 @@
                     console.log(data)
                 })
             })
-            $("input").keyup(function () {
-                socket.emit("typing", displayName)
+            $("input").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(".msg-send").click()
+                    $(".contact--typingBox").hide()
+                    $(".contact--userBox").show()
+                } else
+                    socket.emit("typing", displayName)
             })
         })
     </script>

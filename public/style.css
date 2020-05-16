@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Varela+Round);
 
+:root {
+  --them-color: #DCF8C6;
+  --me-color: #00ccff;
+}
 
 html,
 body {
@@ -10,6 +14,7 @@ body {
 body {
   flex-direction: column;
   margin: 0px;
+  background-image: url(https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png);
 }
 
 body,
@@ -24,9 +29,23 @@ header,
 .messages {
   padding: .5em;
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #777;
+  border-radius: 10px;
+}
 header {
-  background-color: #374455;
+  background-color: #075E54;
   color: white;
   padding-right: 0;
   line-height: 0.5em;
@@ -42,19 +61,16 @@ header {
 }
 
 
-.messages,
-input {
-  background-color: black;
-}
+
 
 input {
-  padding-left: .325em;
+  padding-left: .8em;
   border: none;
   color: #111;
   flex: 1;
   outline: none;
   background-color: #eee;
-
+  border-radius: 30px;
 }
 
 .msg {
@@ -62,15 +78,21 @@ input {
   margin-bottom: 2em;
 }
 
-.msg--date {
+.msg--notify {
   margin-top: 0;
   font-size: 1em;
   font-weight: normal;
   text-align: center;
-  background: #222;
   color: #727b80;
 }
-
+.msg--notify span{
+  padding: 4px;
+  border-radius: 10px;
+  background: #DCF8C6;
+}
+.text{
+  word-wrap: break-word;
+}
 .blockquote {
   border-radius: .35em;
   position: relative;
@@ -90,14 +112,14 @@ input {
 }
 
 .msg--them .blockquote {
-  background-color: #FFBB73;
+  background-color: var(--them-color);
 }
 
 .msg--them .blockquote::after {
-  border: .5em solid #FFBB73;
-  border-color: #FFBB73 transparent transparent #FFBB73;
-  top: .5em;
-  right: -1em;
+  border: .5em solid var(--them-color);
+  border-color: var(--them-color) transparent transparent var(--them-color);
+  top: 0em;
+  right: -.4em;
 }
 
 .by,
@@ -107,30 +129,32 @@ input {
 }
 
 .msg--me .blockquote {
-  background-color: #0099cc;
+  background-color: var(--me-color);
   margin-left: 1em;
 }
 
 .msg--me .blockquote::before {
-  border: .5em solid #0099cc;
-  border-color: #0099cc #0099cc transparent transparent;
-  top: .5em;
-  left: -1em;
+  border: .5em solid var(--me-color);
+  border-color: var(--me-color) var(--me-color) transparent transparent;
+  top: 0em;
+  left: -.4em;
 }
 
 .form {
-  background-color: #727b80;
-  padding: 1px;
+  padding: 4px;
 }
 
-.msg--me .by,
-.msg--them .time {
+.msg--me .by {
   text-align: right;
 }
-
+.time{
+  float: right;
+  font-size: x-small;
+}
 .messages {
   flex: 1;
   overflow: auto;
+  /* background-color: black; */
 }
 
 .msg--them {
@@ -144,6 +168,11 @@ input {
 
 .msg-send {
   padding: 5px;
+  background-color: #25D366;
+  color: #fff;
+  border-radius: 50px;
+  margin-left: 10px;
+  justify-content: center;
 }
 
 .online {

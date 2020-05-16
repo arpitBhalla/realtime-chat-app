@@ -4,7 +4,7 @@ $(document).ready(function () {
             .append($(`<div class="msg msg--${!byMe?"me":"them"}"></div>`)
                 .append($('<div class="blockquote"></div>')
                     .append(
-                        $('<div class="by"></div>').text(chat.displayName),
+                        $('<div class="by"></div>').text(byMe?"You":chat.displayName),
                         $('<div class="text"></div>').text(chat.text),
                         $('<div class="time"></div>').text(chat.time)
                     )))
@@ -36,7 +36,7 @@ $(document).ready(function () {
         userBox(users)
     })
     socket.on("new connection", function (user, users) {
-        $(".messages").append(`<h3 class="msg--date">${user} connected</h3>`)
+        $(".messages").append(`<h3 class="msg--notify">${user} connected</h3>`)
         userBox(users)
     })
     socket.on("new chat", function (chat) {

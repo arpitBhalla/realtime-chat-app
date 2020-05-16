@@ -12,6 +12,12 @@ app.get('/', (req, res) => {
 let chatData = []
 let users = []
 let userNames = []
+app.get("/reset",(req,res)=>{
+ chatData = []
+ users = []
+ userNames = []
+ return res.send("Done Reset")
+})
 io.on('connection', (socket) => {
     socket.on("connected", (uid, name, func) => {
         if (uid && !users.includes(uid)) {

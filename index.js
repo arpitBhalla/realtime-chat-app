@@ -10,16 +10,16 @@ app.get('/', (req, res) => {
 
 
 let chatData = []
-let users=[]
-let userNames=[]
+let users = []
+let userNames = []
 io.on('connection', (socket) => {
-    socket.on("connected", (uid,name, func) => {
-        if(uid && !users.includes(uid)){
+    socket.on("connected", (uid, name, func) => {
+        if (uid && !users.includes(uid)) {
             users.push(uid)
             userNames.push(name)
-            socket.broadcast.emit("new connection", name,userNames)
+            socket.broadcast.emit("new connection", name, userNames)
         }
-        func(chatData,userNames)
+        func(chatData, userNames)
     })
     socket.on('send', (chat, func) => {
         chatData.push({
@@ -30,11 +30,12 @@ io.on('connection', (socket) => {
         socket.broadcast.emit("new chat", chat)
         func("Sent");
     });
-    socket.on("typing",(name)=>{
-        socket.broadcast.emit("getTyping",name)
+    socket.on("typing", (name) => {
+        socket.broadcast.emit("getTyping", name)
     })
 });
 
-http.listen(3000, () => {
-    console.log('listening on *:3000');
+const port = process.env.PORT || 3000;
+http.listen(port, () => {
+    console.log('listening on *:' + port);
 });

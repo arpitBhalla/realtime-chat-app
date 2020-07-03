@@ -1,4 +1,2 @@
-node_modules
-package-lock.json
-auth.html
-indexWithAuth.html
+node_modules/
+.cache/

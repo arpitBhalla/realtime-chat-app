@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginPage from './screens/Login'
 
 import * as ROUTES from './constants/routes';
-import { withAuthentication } from './context';
+import { withAuthentication } from './hooks';
 import './App.css'
 
 const App = () => (

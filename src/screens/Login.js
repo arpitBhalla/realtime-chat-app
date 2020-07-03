@@ -1,11 +1,11 @@
 import React from 'react';
-import { withFirebase } from '../context/FirebaseContext'
+import { withFirebase } from '../hooks'
 
 const Login = ({firebase}) => {
     console.log(firebase)
     // firebase.loginWithPhone("+919996577213")
     return (
-        <><div id="recaptcha-container"></div></>
+        <>zdf</>
     );
 }
 

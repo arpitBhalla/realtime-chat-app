@@ -32256,78 +32256,7 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"../node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"../node_modules/react/index.js","history":"../node_modules/history/esm/history.js","prop-types":"../node_modules/prop-types/index.js","tiny-warning":"../node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"../node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"../src/context/FirebaseContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.withFirebase = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-const FirebaseContext = _react.default.createContext(null);
-
-const withFirebase = Component => props => /*#__PURE__*/_react.default.createElement(FirebaseContext.Consumer, null, firebase => /*#__PURE__*/_react.default.createElement(Component, _extends({}, props, {
-  firebase: firebase
-})));
-
-exports.withFirebase = withFirebase;
-var _default = FirebaseContext;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../src/screens/Login.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _FirebaseContext = require("../context/FirebaseContext");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const Login = ({
-  firebase
-}) => {
-  console.log(firebase); // firebase.loginWithPhone("+919996577213")
-
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    id: "recaptcha-container"
-  }));
-};
-
-var _default = (0, _FirebaseContext.withFirebase)(Login);
-
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","../context/FirebaseContext":"../src/context/FirebaseContext.js"}],"../src/constants/routes.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.PASSWORD_FORGET = exports.ADMIN = exports.ACCOUNT = exports.HOME = exports.SIGN_IN = exports.SIGN_UP = exports.LANDING = void 0;
-const LANDING = '/';
-exports.LANDING = LANDING;
-const SIGN_UP = '/login';
-exports.SIGN_UP = SIGN_UP;
-const SIGN_IN = '/signin';
-exports.SIGN_IN = SIGN_IN;
-const HOME = '/home';
-exports.HOME = HOME;
-const ACCOUNT = '/account';
-exports.ACCOUNT = ACCOUNT;
-const ADMIN = '/admin';
-exports.ADMIN = ADMIN;
-const PASSWORD_FORGET = '/pw-forget';
-exports.PASSWORD_FORGET = PASSWORD_FORGET;
-},{}],"../src/context/AuthSession.js":[function(require,module,exports) {
+},{"react-router":"../node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"../node_modules/react/index.js","history":"../node_modules/history/esm/history.js","prop-types":"../node_modules/prop-types/index.js","tiny-warning":"../node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"../node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"../src/context/AuthContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32343,7 +32272,7 @@ const AuthUserContext = _react.default.createContext(null);
 
 var _default = AuthUserContext;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../src/context/Authorize.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../src/context/FirebaseContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32352,49 +32281,38 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _AuthSession = _interopRequireDefault(require("./AuthSession"));
-
-var _FirebaseContext = require("./FirebaseContext");
-
-var ROUTES = _interopRequireWildcard(require("../constants/routes"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = condition => Component => {
-  class WithAuthorization extends _react.default.Component {
-    componentDidMount() {
-      console.log("AUTHOTIZE PROPS", this.props);
-      this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-        if (!condition(authUser)) {
-          this.setState({});
-        }
-      });
-    }
+const FirebaseContext = _react.default.createContext(null);
 
-    componentWillUnmount() {
-      this.listener();
-    }
-
-    render() {
-      return /*#__PURE__*/_react.default.createElement(_AuthSession.default.Consumer, null, authUser => condition(authUser) ? /*#__PURE__*/_react.default.createElement(Component, this.props) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Redirect, {
-        to: ROUTES.SIGN_IN
-      }));
-    }
-
-  }
-
-  return (0, _FirebaseContext.withFirebase)(WithAuthorization);
-};
-
+var _default = FirebaseContext;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./AuthSession":"../src/context/AuthSession.js","./FirebaseContext":"../src/context/FirebaseContext.js","../constants/routes":"../src/constants/routes.js"}],"../src/context/Authenticate.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../src/context/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "AuthUserContext", {
+  enumerable: true,
+  get: function () {
+    return _AuthContext.default;
+  }
+});
+Object.defineProperty(exports, "FirebaseContext", {
+  enumerable: true,
+  get: function () {
+    return _FirebaseContext.default;
+  }
+});
+
+var _AuthContext = _interopRequireDefault(require("./AuthContext"));
+
+var _FirebaseContext = _interopRequireDefault(require("./FirebaseContext"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./AuthContext":"../src/context/AuthContext.js","./FirebaseContext":"../src/context/FirebaseContext.js"}],"../src/hooks/Firebase.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32404,11 +32322,30 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
+var _context = require("../context");
 
-var _AuthSession = _interopRequireDefault(require("./AuthSession"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _FirebaseContext = require("./FirebaseContext");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var _default = Component => props => /*#__PURE__*/_react.default.createElement(_context.FirebaseContext.Consumer, null, firebase => /*#__PURE__*/_react.default.createElement(Component, _extends({}, props, {
+  firebase: firebase
+})));
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../context":"../src/context/index.js"}],"../src/hooks/Authenticate.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _context = require("../context");
+
+var _Firebase = _interopRequireDefault(require("./Firebase"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32436,34 +32373,94 @@ var _default = Component => {
     }
 
     render() {
-      return /*#__PURE__*/_react.default.createElement(_AuthSession.default.Provider, {
+      return /*#__PURE__*/_react.default.createElement(_context.AuthUserContext.Provider, {
         value: this.state.authUser
       }, /*#__PURE__*/_react.default.createElement(Component, this.props));
     }
 
   }
 
-  return (0, _FirebaseContext.withFirebase)(WithAuthentication);
+  return (0, _Firebase.default)(WithAuthentication);
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./AuthSession":"../src/context/AuthSession.js","./FirebaseContext":"../src/context/FirebaseContext.js"}],"../src/context/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../context":"../src/context/index.js","./Firebase":"../src/hooks/Firebase.js"}],"../src/constants/routes.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "AuthSession", {
-  enumerable: true,
-  get: function () {
-    return _AuthSession.default;
-  }
+exports.PASSWORD_FORGET = exports.ADMIN = exports.ACCOUNT = exports.HOME = exports.SIGN_IN = exports.SIGN_UP = exports.LANDING = void 0;
+const LANDING = '/';
+exports.LANDING = LANDING;
+const SIGN_UP = '/login';
+exports.SIGN_UP = SIGN_UP;
+const SIGN_IN = '/signin';
+exports.SIGN_IN = SIGN_IN;
+const HOME = '/home';
+exports.HOME = HOME;
+const ACCOUNT = '/account';
+exports.ACCOUNT = ACCOUNT;
+const ADMIN = '/admin';
+exports.ADMIN = ADMIN;
+const PASSWORD_FORGET = '/pw-forget';
+exports.PASSWORD_FORGET = PASSWORD_FORGET;
+},{}],"../src/hooks/Authorize.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-Object.defineProperty(exports, "withAuthorization", {
-  enumerable: true,
-  get: function () {
-    return _Authorize.default;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _context = require("../context");
+
+var _Firebase = require("./Firebase");
+
+var ROUTES = _interopRequireWildcard(require("../constants/routes"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = condition => Component => {
+  class WithAuthorization extends _react.default.Component {
+    componentDidMount() {
+      console.log("AUTHOTIZE PROPS", this.props);
+      this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
+        if (!condition(authUser)) {
+          this.setState({});
+        }
+      });
+    }
+
+    componentWillUnmount() {
+      this.listener();
+    }
+
+    render() {
+      return /*#__PURE__*/_react.default.createElement(_context.AuthUserContext.Consumer, null, authUser => condition(authUser) ? /*#__PURE__*/_react.default.createElement(Component, this.props) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Redirect, {
+        to: ROUTES.SIGN_IN
+      }));
+    }
+
   }
+
+  return (0, _Firebase.withFirebase)(WithAuthorization);
+};
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../context":"../src/context/index.js","./Firebase":"../src/hooks/Firebase.js","../constants/routes":"../src/constants/routes.js"}],"../src/hooks/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 Object.defineProperty(exports, "withAuthentication", {
   enumerable: true,
@@ -32471,15 +32468,52 @@ Object.defineProperty(exports, "withAuthentication", {
     return _Authenticate.default;
   }
 });
-
-var _AuthSession = _interopRequireDefault(require("./AuthSession"));
-
-var _Authorize = _interopRequireDefault(require("./Authorize"));
+Object.defineProperty(exports, "withFirebase", {
+  enumerable: true,
+  get: function () {
+    return _Firebase.default;
+  }
+});
+Object.defineProperty(exports, "withAuthorize", {
+  enumerable: true,
+  get: function () {
+    return _Authorize.default;
+  }
+});
 
 var _Authenticate = _interopRequireDefault(require("./Authenticate"));
 
+var _Firebase = _interopRequireDefault(require("./Firebase"));
+
+var _Authorize = _interopRequireDefault(require("./Authorize"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./AuthSession":"../src/context/AuthSession.js","./Authorize":"../src/context/Authorize.js","./Authenticate":"../src/context/Authenticate.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./Authenticate":"../src/hooks/Authenticate.js","./Firebase":"../src/hooks/Firebase.js","./Authorize":"../src/hooks/Authorize.js"}],"../src/screens/Login.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _hooks = require("../hooks");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Login = ({
+  firebase
+}) => {
+  console.log(firebase); // firebase.loginWithPhone("+919996577213")
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "zdf");
+};
+
+var _default = (0, _hooks.withFirebase)(Login);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../hooks":"../src/hooks/index.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -32567,7 +32601,7 @@ var _Login = _interopRequireDefault(require("./screens/Login"));
 
 var ROUTES = _interopRequireWildcard(require("./constants/routes"));
 
-var _context = require("./context");
+var _hooks = require("./hooks");
 
 require("./App.css");
 
@@ -32586,10 +32620,10 @@ const App = () => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Brow
   component: _Login.default
 })));
 
-var _default = (0, _context.withAuthentication)(App);
+var _default = (0, _hooks.withAuthentication)(App);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./screens/Login":"../src/screens/Login.js","./constants/routes":"../src/constants/routes.js","./context":"../src/context/index.js","./App.css":"../src/App.css"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./screens/Login":"../src/screens/Login.js","./constants/routes":"../src/constants/routes.js","./hooks":"../src/hooks/index.js","./App.css":"../src/App.css"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46502,7 +46536,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 require("@firebase/auth");
-},{"@firebase/auth":"../node_modules/@firebase/auth/dist/auth.esm.js"}],"../src/components/Firebase.js":[function(require,module,exports) {
+},{"@firebase/auth":"../node_modules/@firebase/auth/dist/auth.esm.js"}],"../src/util/Firebase.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46557,20 +46591,20 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _App = _interopRequireDefault(require("./src/App"));
 
-var _Firebase = _interopRequireDefault(require("./src/components/Firebase"));
+var _Firebase = _interopRequireDefault(require("./src/util/Firebase"));
 
-var _FirebaseContext = _interopRequireDefault(require("./src/context/FirebaseContext"));
+var _context = require("./src/context");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Index = () => {
-  return /*#__PURE__*/_react.default.createElement(_FirebaseContext.default.Provider, {
+  return /*#__PURE__*/_react.default.createElement(_context.FirebaseContext.Provider, {
     value: new _Firebase.default()
   }, /*#__PURE__*/_react.default.createElement(_App.default, null));
 };
 
 _reactDom.default.render( /*#__PURE__*/_react.default.createElement(Index, null), document.getElementById("root"));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./src/App":"../src/App.js","./src/components/Firebase":"../src/components/Firebase.js","./src/context/FirebaseContext":"../src/context/FirebaseContext.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./src/App":"../src/App.js","./src/util/Firebase":"../src/util/Firebase.js","./src/context":"../src/context/index.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -46598,7 +46632,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45197" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41939" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDom from 'react-dom'
 import App from './src/App'
-import Firebase from './src/components/Firebase'
-import FirebaseContext from './src/context/FirebaseContext'
+import Firebase from './src/util/Firebase'
+import { FirebaseContext } from './src/context'
 
 
 const Index = () => {
     return (
         <FirebaseContext.Provider value={new Firebase()}>
-            <App/>
+            <App />
         </FirebaseContext.Provider>
     );
 }
 
-ReactDom.render(<Index/>,document.getElementById("root"))
+ReactDom.render(<Index />, document.getElementById("root"))

@@ -32384,28 +32384,7 @@ var _default = Component => {
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../context":"../src/context/index.js","./Firebase":"../src/hooks/Firebase.js"}],"../src/constants/routes.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.PASSWORD_FORGET = exports.ADMIN = exports.ACCOUNT = exports.HOME = exports.SIGN_IN = exports.SIGN_UP = exports.LANDING = void 0;
-const LANDING = '/';
-exports.LANDING = LANDING;
-const SIGN_UP = '/login';
-exports.SIGN_UP = SIGN_UP;
-const SIGN_IN = '/signin';
-exports.SIGN_IN = SIGN_IN;
-const HOME = '/home';
-exports.HOME = HOME;
-const ACCOUNT = '/account';
-exports.ACCOUNT = ACCOUNT;
-const ADMIN = '/admin';
-exports.ADMIN = ADMIN;
-const PASSWORD_FORGET = '/pw-forget';
-exports.PASSWORD_FORGET = PASSWORD_FORGET;
-},{}],"../src/hooks/Authorize.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../context":"../src/context/index.js","./Firebase":"../src/hooks/Firebase.js"}],"../src/hooks/Authorize.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32419,44 +32398,36 @@ var _reactRouterDom = require("react-router-dom");
 
 var _context = require("../context");
 
-var _Firebase = require("./Firebase");
-
-var ROUTES = _interopRequireWildcard(require("../constants/routes"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var _Firebase = _interopRequireDefault(require("./Firebase"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = condition => Component => {
   class WithAuthorization extends _react.default.Component {
-    componentDidMount() {
-      console.log("AUTHOTIZE PROPS", this.props);
-      this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-        if (!condition(authUser)) {
-          this.setState({});
-        }
-      });
-    }
-
-    componentWillUnmount() {
-      this.listener();
-    }
-
+    // componentDidMount() {
+    // console.log("AUTHOTIZE PROPS", this.props)
+    // this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
+    //     if (!condition(authUser)) {
+    //         this.setState({})
+    //     }
+    // });
+    // }
+    // componentWillUnmount() {
+    //     this.listener();
+    // }
     render() {
-      return /*#__PURE__*/_react.default.createElement(_context.AuthUserContext.Consumer, null, authUser => condition(authUser) ? /*#__PURE__*/_react.default.createElement(Component, this.props) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Redirect, {
-        to: ROUTES.SIGN_IN
+      return /*#__PURE__*/_react.default.createElement(_context.AuthUserContext.Consumer, null, authUser => condition.verifier(authUser) ? /*#__PURE__*/_react.default.createElement(Component, this.props) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Redirect, {
+        to: condition.ifNot
       }));
     }
 
   }
 
-  return (0, _Firebase.withFirebase)(WithAuthorization);
+  return (0, _Firebase.default)(WithAuthorization);
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../context":"../src/context/index.js","./Firebase":"../src/hooks/Firebase.js","../constants/routes":"../src/constants/routes.js"}],"../src/hooks/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../context":"../src/context/index.js","./Firebase":"../src/hooks/Firebase.js"}],"../src/hooks/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32488,7 +32459,51 @@ var _Firebase = _interopRequireDefault(require("./Firebase"));
 var _Authorize = _interopRequireDefault(require("./Authorize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./Authenticate":"../src/hooks/Authenticate.js","./Firebase":"../src/hooks/Firebase.js","./Authorize":"../src/hooks/Authorize.js"}],"../src/screens/Login.js":[function(require,module,exports) {
+},{"./Authenticate":"../src/hooks/Authenticate.js","./Firebase":"../src/hooks/Firebase.js","./Authorize":"../src/hooks/Authorize.js"}],"../src/constants/routes.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ADMIN = exports.ACCOUNT = exports.LOGIN = exports.HOME = void 0;
+const HOME = '/';
+exports.HOME = HOME;
+const LOGIN = '/login';
+exports.LOGIN = LOGIN;
+const ACCOUNT = '/account';
+exports.ACCOUNT = ACCOUNT;
+const ADMIN = '/admin';
+exports.ADMIN = ADMIN;
+},{}],"../src/constants/roles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var Routes = _interopRequireWildcard(require("./routes"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var _default = {
+  SHOULD_LOGGEDIN: {
+    verifier: authUser => !!authUser,
+    ifNot: Routes.LOGIN
+  },
+  SHOULD_NOT_LOGGEDIN: {
+    verifier: authUser => !authUser,
+    ifNot: Routes.HOME
+  },
+  ADMIN: {
+    verifier: authUser => authUser.isAdmin,
+    ifNot: Routes.HOME
+  }
+};
+exports.default = _default;
+},{"./routes":"../src/constants/routes.js"}],"../src/screens/Login.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32500,20 +32515,45 @@ var _react = _interopRequireDefault(require("react"));
 
 var _hooks = require("../hooks");
 
+var _roles = _interopRequireDefault(require("../constants/roles"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Login = ({
   firebase
 }) => {
-  console.log(firebase); // firebase.loginWithPhone("+919996577213")
-
+  // console.log(firebase)
+  // firebase.loginWithPhone("+919996577213")
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "zdf");
 };
 
-var _default = (0, _hooks.withFirebase)(Login);
+var _default = (0, _hooks.withAuthorize)(_roles.default.SHOULD_NOT_LOGGEDIN)((0, _hooks.withFirebase)(Login));
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../hooks":"../src/hooks/index.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../hooks":"../src/hooks/index.js","../constants/roles":"../src/constants/roles.js"}],"../src/screens/Home.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _hooks = require("../hooks");
+
+var _roles = _interopRequireDefault(require("../constants/roles"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Home = () => {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "Only Authorized User");
+};
+
+var _default = (0, _hooks.withAuthorize)(_roles.default.SHOULD_LOGGEDIN)(Home);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../hooks":"../src/hooks/index.js","../constants/roles":"../src/constants/roles.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -32599,6 +32639,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _Login = _interopRequireDefault(require("./screens/Login"));
 
+var _Home = _interopRequireDefault(require("./screens/Home"));
+
 var ROUTES = _interopRequireWildcard(require("./constants/routes"));
 
 var _hooks = require("./hooks");
@@ -32614,16 +32656,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const App = () => /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
   exact: true,
   path: ROUTES.LANDING,
-  component: () => /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "LAND")
+  component: _Home.default
 }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-  path: ROUTES.SIGN_UP,
+  path: ROUTES.LOGIN,
   component: _Login.default
 })));
 
 var _default = (0, _hooks.withAuthentication)(App);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./screens/Login":"../src/screens/Login.js","./constants/routes":"../src/constants/routes.js","./hooks":"../src/hooks/index.js","./App.css":"../src/App.css"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./screens/Login":"../src/screens/Login.js","./screens/Home":"../src/screens/Home.js","./constants/routes":"../src/constants/routes.js","./hooks":"../src/hooks/index.js","./App.css":"../src/App.css"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46632,7 +46674,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41939" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39201" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

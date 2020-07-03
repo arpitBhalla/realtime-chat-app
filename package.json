@@ -1,10 +1,13 @@
 {
-  "name": "node-socket-io-chat-app",
+  "name": "socket-io-chat-app",
   "version": "1.0.0",
   "description": "chatApp",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "parcel public/index.html",
+    "dev": "concurrently \"npm start\" \"npm run backend\" --silently",
+    "build": "parcel build public/index.html",
+    "backend": "node ./server/index"
   },
   "keywords": [
     "nodejs",
@@ -12,9 +15,35 @@
     "socket-io"
   ],
   "author": "Arpit Bhalla",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "chalk": "^4.1.0",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arpitBhalla/realtime-chat-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arpitBhalla/realtime-chat-app/issues"
+  },
+  "homepage": "https://github.com/arpitBhalla/realtime-chat-app#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

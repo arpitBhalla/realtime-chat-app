@@ -6,7 +6,6 @@ import HomePage from './screens/Home'
 
 import * as ROUTES from './constants/routes';
 import { withAuthentication } from './hooks';
-import './App.css'
 
 const App = () => (
     <Router>

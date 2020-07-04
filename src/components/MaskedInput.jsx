@@ -1,8 +1,14 @@
 import React from 'react';
 import MaskedInput from 'react-text-mask'
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+    root: {
+    margin:"3px"  
+    }
+};
 
 const convertMask = (mask) => mask.split("").map(v => {
     if (v == "9")
@@ -10,15 +16,16 @@ const convertMask = (mask) => mask.split("").map(v => {
     return v
 })
 
-const Inputa = ({ label, value, onChange, mask = " " }) => (
-    <FormControl>
-        <InputLabel htmlFor="formatted-text-mask-input">{label}</InputLabel>
-        <Input
-            value={value}
-            name="textmask"
-            onChange={onChange}
-            id="formatted-text-mask-input"
-            inputComponent={({ inputRef, ...other }) => (
+export default withStyles(styles)(({ label, startText, variant, value, onChange, mask = " ", classes, ...props }) => (
+
+    <TextField
+        className={classes.root}
+        label={label}
+        variant={variant || "standard"}
+        value={value}
+        onChange={onChange}
+        InputProps={{
+            inputComponent: ({ inputRef, ...other }) => (
                 <MaskedInput
                     guide={false}
                     {...other}
@@ -27,9 +34,8 @@ const Inputa = ({ label, value, onChange, mask = " " }) => (
                     }}
                     mask={convertMask(mask)}
                 />
-            )}
-        />
-    </FormControl>
-);
-
-export default Inputa;
+            ),
+            startAdornment: startText && <InputAdornment position="start">{startText || ""}</InputAdornment>,
+        }}
+    />
+))
